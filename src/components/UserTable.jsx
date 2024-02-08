@@ -1,3 +1,5 @@
+import { user, users } from "../signals/store.js";
+
 const people = [
   {
     name: "Leslie Alexander",
@@ -54,14 +56,19 @@ const people = [
 ];
 
 export function UserTable() {
+  const setUser = () => {};
+  const deleteUser = (id) => {
+    users.value = users.value.filter((user) => user.id !== id);
+  };
+
   return (
     <div className="mt-6">
       <h2 className="text-lg font-semibold leading-6 text-gray-900">
         User Table
       </h2>
       <ul role="list" className="divide-y divide-gray-100">
-        {people.map((person) => (
-          <li key={person.email} className="flex justify-between gap-x-6 py-5">
+        {users.value.map((person) => (
+          <li key={person.id} className="flex justify-between gap-x-6 py-5">
             <div className="flex min-w-0 gap-x-4">
               <img
                 className="h-12 w-12 flex-none rounded-full bg-gray-50"
@@ -77,23 +84,31 @@ export function UserTable() {
                 </p>
               </div>
             </div>
-            <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-              <p className="text-sm leading-6 text-gray-900">{person.role}</p>
-              {person.lastSeen ? (
-                <p className="mt-1 text-xs leading-5 text-gray-500">
-                  Last seen{" "}
-                  <time dateTime={person.lastSeenDateTime}>
-                    {person.lastSeen}
-                  </time>
-                </p>
-              ) : (
-                <div className="mt-1 flex items-center gap-x-1.5">
-                  <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <div className="flex gap-6">
+              <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                <p className="text-sm leading-6 text-gray-900">{person.role}</p>
+                {person.lastSeen ? (
+                  <p className="mt-1 text-xs leading-5 text-gray-500">
+                    Last seen{" "}
+                    <time dateTime={person.lastSeenDateTime}>
+                      {person.lastSeen}
+                    </time>
+                  </p>
+                ) : (
+                  <div className="mt-1 flex items-center gap-x-1.5">
+                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
+                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    </div>
+                    <p className="text-xs leading-5 text-gray-500">Online</p>
                   </div>
-                  <p className="text-xs leading-5 text-gray-500">Online</p>
-                </div>
-              )}
+                )}
+              </div>
+              <div>
+                <button className="btn mr-4">Edit</button>
+                <button onClick={deleteUser} className="btn text-red-700">
+                  Delete
+                </button>
+              </div>
             </div>
           </li>
         ))}

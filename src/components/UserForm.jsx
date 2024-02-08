@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 export function UserForm() {
   const createOrUpdate = (event) => {
     event.preventDefault();
-    users.value = [...users.value, { ...user.value, _id: nanoid(8) }];
+    if (user) users.value = [...users.value, { ...user.value, _id: nanoid(8) }];
     console.log("users.value updated:", users.value); // Log updated users array
   };
 
@@ -28,20 +28,13 @@ export function UserForm() {
         </div>
 
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Personal Information
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Use a permanent address where you can receive mail.
-          </p>
-
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                htmlFor="first-name"
+                htmlFor="name"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                First name
+                Name
               </label>
               <div className="mt-2">
                 <input
@@ -57,24 +50,6 @@ export function UserForm() {
             </div>
 
             <div className="sm:col-span-3">
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Last name
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  autoComplete="family-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-4">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -94,10 +69,10 @@ export function UserForm() {
               </div>
             </div>
 
-            <div className="col-span-full">
+            <div className="sm:col-span-3">
               <label
-                htmlFor="street-address"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="password"
+                className="block w-full text-sm font-medium leading-6 text-gray-900"
               >
                 Password
               </label>
@@ -112,56 +87,20 @@ export function UserForm() {
                 />
               </div>
             </div>
-
-            <div className="sm:col-span-2 sm:col-start-1">
+            <div className="sm:col-span-3">
               <label
-                htmlFor="city"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                htmlFor="imageUrl"
+                className="block w-full text-sm font-medium leading-6 text-gray-900"
               >
-                City
+                Image URL
               </label>
               <div className="mt-2">
                 <input
+                  onChange={setUser}
+                  value={user.value.imageUrl}
                   type="text"
-                  name="city"
-                  id="city"
-                  autoComplete="address-level2"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="region"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                State / Province
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="region"
-                  id="region"
-                  autoComplete="address-level1"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="postal-code"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                ZIP / Postal code
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="postal-code"
-                  id="postal-code"
-                  autoComplete="postal-code"
+                  name="imageUrl"
+                  id="imageUrl"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>

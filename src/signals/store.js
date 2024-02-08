@@ -5,6 +5,7 @@ export const user = signal({
   name: "",
   email: "",
   password: "",
+  imageUrl: "",
 });
 
 export const users = signal([]);
